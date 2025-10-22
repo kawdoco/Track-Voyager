@@ -1,0 +1,31 @@
+# voyager_data.py
+
+# === Historical + Annual Interpolated Voyager 1 Data ===
+VOYAGER_EVENTS = [
+    {"year": 1977, "event": "Launch", "coords": (0, 0, 0)},
+    {"year": 1978, "event": "Cruise", "coords": (2.5e7, 1e6, 0)},
+    {"year": 1979, "event": "Jupiter Flyby", "coords": (7.78e8, 0, 0)},
+    {"year": 1980, "event": "Saturn Flyby", "coords": (1.43e9, 5e7, 0)},
+    {"year": 1981, "event": "Interplanetary Cruise", "coords": (2e9, 1e8, 0)},
+    {"year": 1982, "event": "Interplanetary Cruise", "coords": (2.5e9, 1.2e8, 2e7)},
+    {"year": 1983, "event": "Interplanetary Cruise", "coords": (3e9, 1.5e8, 5e7)},
+    {"year": 1984, "event": "Interplanetary Cruise", "coords": (3.25e9, 1.8e8, 6e7)},
+    {"year": 1985, "event": "Interplanetary Cruise", "coords": (3.5e9, 2e8, 5e7)},
+    {"year": 1986, "event": "Interplanetary Cruise", "coords": (4e9, 2.2e8, 6e7)},
+    {"year": 1987, "event": "Interplanetary Cruise", "coords": (4.5e9, 2.4e8, 7e7)},
+    {"year": 1988, "event": "Interplanetary Cruise", "coords": (5e9, 2.6e8, 8e7)},
+    {"year": 1989, "event": "Interplanetary Cruise", "coords": (5.5e9, 2.8e8, 9e7)},
+    {"year": 1990, "event": "Family Portrait", "coords": (6e9, 1e9, 0)},
+    {"year": 1991, "event": "Interstellar Approach", "coords": (6.5e9, 1.1e9, 1e8)},
+    {"year": 1992, "event": "Interstellar Approach", "coords": (7e9, 1.2e9, 2e8)},
+    {"year": 1993, "event": "Interstellar Approach", "coords": (7.3e9, 1.3e9, 2.5e8)},
+    {"year": 1994, "event": "Interstellar Approach", "coords": (7.6e9, 1.4e9, 3e8)},
+    {"year": 1995, "event": "Interstellar Approach", "coords": (8e9, 1.5e9, 5e8)},
+    {"year": 2000, "event": "Heliosheath Entry", "coords": (1.0e10, 2e9, 7e8)},
+    {"year": 2005, "event": "Heliosheath Cruise", "coords": (1.2e10, 2.2e9, 9e8)},
+    {"year": 2010, "event": "Heliosheath Cruise", "coords": (1.5e10, 2.5e9, 1e9)},
+    {"year": 2012, "event": "Entered Interstellar Space", "coords": (1.8e10, 2e9, 1e9)},
+    {"year": 2015, "event": "Interstellar Cruise", "coords": (2.0e10, 2.5e9, 1.2e9)},
+    {"year": 2020, "event": "Interstellar Cruise", "coords": (2.2e10, 2.8e9, 1.4e9)},
+    {"year": 2025, "event": "Current Position", "coords": (2.4e10, 3e9, 1.5e9)},
+]
