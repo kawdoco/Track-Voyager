@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QTimer
 from voyager_plot import VoyagerPlot
-from voyager_data import VOYAGER_EVENTS
+from Voyager_data import VOYAGER_EVENTS
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -75,4 +75,22 @@ class MainWindow(QMainWindow):
         self.timer.timeout.connect(self.animate_voyager)
         self.timer.start(200)
 
+# === Controls ===
+    def start_animation(self): self.timer.start(200)
+    def stop_animation(self): self.timer.stop()
+    def reset_animation(self):
+        self.plot_widget.current_index = 0
+        self.plot_widget.plot_trajectory()
 
+    def animate_voyager(self):
+        self.plot_widget.move_forward()
+        x, y, z = self.plot_widget.get_current_position()
+        for e in VOYAGER_EVENTS:
+            ex, ey, ez = e["coords"]
+            dist = np.sqrt((x-ex)**2 + (y-ey)**2 + (z-ez)**2)
+            if dist < 1e9:
+                self.details_label.setText(
+                    f"Year: {e['year']}\nEvent: {e['event']}\nPosition: ({x:.2e}, {y:.2e}, {z:.2e}) km"
+                )
+                return
+        self.details_label.setText(f"Voyager position:\n({x:.2e}, {y:.2e}, {z:.2e}) km")
