@@ -25,3 +25,37 @@ class VoyagerPlot(FigureCanvas):
         self.current_index = 0
 
         self.init_plot()
+
+    def init_plot(self):
+        self.figure.clear()
+        # Show only 15 points
+        idxs = np.linspace(0, len(self.xs)-1, self.display_points).astype(int)
+        x_disp = np.array(self.xs)[idxs]
+        y_disp = np.array(self.ys)[idxs]
+        z_disp = np.array(self.zs)[idxs]
+
+        if self.mode == "3D":
+            self.ax = self.figure.add_subplot(111, projection="3d", facecolor="white")
+            self.ax.plot(x_disp, y_disp, z_disp, color="blue", linestyle="--", linewidth=2, label="Voyager Path")
+            for i in idxs:
+                x, y, z = self.xs[i], self.ys[i], self.zs[i]
+                self.ax.scatter(x, y, z, s=70, marker="o", color="orange")
+                self.ax.text(x, y, z, f"{VOYAGER_EVENTS[i]['year']}", fontsize=8)
+            self.voyager_marker = self.ax.scatter([], [], [], s=120, marker="*", color="red", label="Voyager 1")
+            self.ax.set_title("Voyager 1 Path (3D)", fontsize=13, pad=15)
+            self.ax.set_xlabel("X (km)")
+            self.ax.set_ylabel("Y (km)")
+            self.ax.set_zlabel("Z (km)")
+            self.ax.legend()
+        else:
+            self.ax = self.figure.add_subplot(111, facecolor="#1e1e2e")
+            self.ax.plot(x_disp, y_disp, color="#3c82f6", linestyle="--", linewidth=2)
+            for i in idxs:
+                self.ax.scatter(self.xs[i], self.ys[i], s=60, color="#ffb703")
+            self.voyager_marker = self.ax.scatter([], [], s=120, marker="*", color="#00f5d4")
+            self.ax.set_title("Top-Down XY Projection", color="white", fontsize=12, pad=10)
+            self.ax.set_xlabel("X (km)", color="white")
+            self.ax.set_ylabel("Y (km)", color="white")
+            self.ax.tick_params(colors="white")
+
+        self.draw()
