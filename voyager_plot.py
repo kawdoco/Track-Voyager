@@ -59,3 +59,27 @@ class VoyagerPlot(FigureCanvas):
             self.ax.tick_params(colors="white")
 
         self.draw()
+
+    def set_mode(self, mode):
+        self.mode = mode
+        self.init_plot()
+
+    def plot_trajectory(self):
+        cx, cy, cz = self.path_x[self.current_index], self.path_y[self.current_index], self.path_z[self.current_index]
+        if self.mode == "3D":
+            self.voyager_marker._offsets3d = ([cx], [cy], [cz])
+        else:
+            self.voyager_marker.set_offsets([[cx, cy]])
+        self.draw()
+
+    def move_forward(self):
+        self.current_index = (self.current_index + 1) % self.num_steps
+        self.plot_trajectory()
+
+    def show_event(self, coords):
+        # Jump marker to specific coordinates
+        self.current_index = int((coords[0] - self.xs[0]) / (self.xs[-1] - self.xs[0]) * (self.num_steps-1))
+        self.plot_trajectory()
+
+    def get_current_position(self):
+        return self.path_x[self.current_index], self.path_y[self.current_index], self.path_z[self.current_index]
