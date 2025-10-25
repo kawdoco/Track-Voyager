@@ -5,7 +5,7 @@ from matplotlib.figure import Figure
 from voyager_data import VOYAGER_EVENTS
 
 class VoyagerPlot(FigureCanvas):
-    def __init__(self, figure=None, mode="3D", display_points=15):
+    def __init__(self, parent=None, mode="3D", display_points=15):
         self.mode = mode
         self.display_points = display_points
         fig = Figure(figsize=(7, 7), facecolor="white")

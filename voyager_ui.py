@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QTimer
 from voyager_plot import VoyagerPlot
-from Voyager_data import VOYAGER_EVENTS
+from voyager_data import VOYAGER_EVENTS
 
 class MainWindow(QMainWindow):
     def __init__(self):
