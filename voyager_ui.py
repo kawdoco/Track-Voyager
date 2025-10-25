@@ -94,3 +94,56 @@ class MainWindow(QMainWindow):
                 )
                 return
         self.details_label.setText(f"Voyager position:\n({x:.2e}, {y:.2e}, {z:.2e}) km")
+
+
+# === Search ===
+    def search_year(self):
+        year_text = self.search_input.text().strip()
+        if not year_text.isdigit():
+            QMessageBox.warning(self, "Invalid Input", "Please enter a valid year (numbers only).")
+            return
+        year = int(year_text)
+        sorted_events = sorted(VOYAGER_EVENTS, key=lambda e: e["year"])
+        years = [e["year"] for e in sorted_events]
+        if year < years[0] or year > years[-1]:
+            QMessageBox.information(self, "No Data", f"No data available for year {year}.")
+            return
+
+        for i in range(len(sorted_events)-1):
+            y0, y1 = sorted_events[i]["year"], sorted_events[i+1]["year"]
+            if y0 <= year <= y1:
+                coords0 = np.array(sorted_events[i]["coords"])
+                coords1 = np.array(sorted_events[i+1]["coords"])
+                t = (year - y0)/(y1 - y0)
+                pos = coords0 + t*(coords1 - coords0)
+                event_before = sorted_events[i]["event"]
+                event_after = sorted_events[i+1]["event"]
+                break
+
+        self.plot_widget.show_event(pos)
+        QMessageBox.information(
+            self,
+            f"Voyager Position - {year}",
+            f"Approximate Position for {year}:\n"
+            f"X: {pos[0]:.2e} km\n"
+            f"Y: {pos[1]:.2e} km\n"
+            f"Z: {pos[2]:.2e} km\n\n"
+            f"Between events:\n- {y0}: {event_before}\n- {y1}: {event_after}"
+        )
+
+    # === Event click ===
+    def event_selected(self, item):
+        text = item.text()
+        year = int(text.split(" - ")[0])
+        for e in VOYAGER_EVENTS:
+            if e["year"] == year:
+                self.plot_widget.show_event(e["coords"])
+                self.details_label.setText(
+                    f"Year: {e['year']}\nEvent: {e['event']}\nPosition: {e['coords']}"
+                )
+                break
+
+    # === View change ===
+    def change_view(self):
+        mode = "3D" if self.view_selector.currentText()=="3D View" else "2D"
+        self.plot_widget.set_mode(mode)
