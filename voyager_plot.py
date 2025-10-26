@@ -168,3 +168,4 @@ class VoyagerPlot(FigureCanvas):
             self.path_y[self.current_index],
             self.path_z[self.current_index],
         )
+ 
