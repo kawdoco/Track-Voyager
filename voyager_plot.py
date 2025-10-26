@@ -2,7 +2,7 @@
 import numpy as np
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-from voyager_data import VOYAGER_EVENTS
+from Voyager_data import VOYAGER_EVENTS
 
 class VoyagerPlot(FigureCanvas):
     def __init__(self, parent=None, mode="3D", display_points=15):
