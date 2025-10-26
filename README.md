@@ -27,7 +27,7 @@ python -m venv venv
 
 ### 3. Activate the virtual environment
 ```bash
-venv\Scripts\activate.bat
+venv\bin\activate
 ```
 
 ### 4. Install required packages
