@@ -160,7 +160,10 @@ class MainWindow(QMainWindow):
     # === Theme Toggle ===
     def toggle_theme(self):
         self.dark_mode = not self.dark_mode
+        self.plot_widget.set_theme(self.dark_mode)
         self.apply_theme()
+
+        
 
     def apply_theme(self):
         if self.dark_mode:
